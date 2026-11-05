@@ -1,1 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38D591"/><stop offset="1" stop-color="#26A699"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#g)"/><text x="256" y="350" text-anchor="middle" font-family="-apple-system,Helvetica,Arial,sans-serif" font-weight="800" font-size="260" fill="#fff">S/</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- App icon: bright green coin on dark green, with sparkles. Readable at 32px. -->
+  <rect width="512" height="512" rx="96" fill="#2F6B4F"/>
+  <!-- Soft inner wash -->
+  <rect x="28" y="28" width="456" height="456" rx="80" fill="#356F54" opacity="0.55"/>
+  <!-- Coin thickness (dark green edge) -->
+  <ellipse cx="256" cy="292" rx="148" ry="148" fill="#1E4A36"/>
+  <!-- Coin face -->
+  <ellipse cx="256" cy="268" rx="148" ry="148" fill="#5FF5A0"/>
+  <!-- Inner ring -->
+  <ellipse cx="256" cy="268" rx="118" ry="118" fill="none" stroke="#2F6B4F" stroke-width="14"/>
+  <!-- Shine arcs -->
+  <path d="M190 210 C210 175, 300 165, 330 205" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.92"/>
+  <path d="M205 240 C220 220, 280 215, 305 238" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+  <!-- Four-point sparkles -->
+  <path d="M400 118 L412 148 L442 160 L412 172 L400 202 L388 172 L358 160 L388 148 Z" fill="#FFFFFF"/>
+  <path d="M118 150 L125 168 L143 175 L125 182 L118 200 L111 182 L93 175 L111 168 Z" fill="#FFFFFF"/>
+  <path d="M390 340 L396 354 L410 360 L396 366 L390 380 L384 366 L370 360 L384 354 Z" fill="#FFFFFF" opacity="0.9"/>
+</svg>
