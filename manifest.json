@@ -7,10 +7,10 @@
   "background_color": "#2F6B4F",
   "theme_color": "#2F6B4F",
   "icons": [
-    {"src": "icon.svg?v=34", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
-    {"src": "favicon-32.png?v=34", "sizes": "32x32", "type": "image/png"},
-    {"src": "icon-180.png?v=34", "sizes": "180x180", "type": "image/png"},
-    {"src": "icon-512.png?v=34", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-    {"src": "icon-512.png?v=34", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+    {"src": "icon.svg?v=35", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
+    {"src": "favicon-32.png?v=35", "sizes": "32x32", "type": "image/png"},
+    {"src": "icon-180.png?v=35", "sizes": "180x180", "type": "image/png"},
+    {"src": "icon-512.png?v=35", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png?v=35", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
   ]
 }
