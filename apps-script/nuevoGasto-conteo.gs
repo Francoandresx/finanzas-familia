@@ -107,3 +107,30 @@ function saldoEgresosDesdeMontos_() {
   var ingresos = Number(SpreadsheetApp.getActive().getSheetByName('INGRESOS').getRange('H14').getValue()) || 0;
   return Math.round((ingresos - suma - koda) * 100) / 100;
 }
+
+/**
+ * Por qué el reloj no sale en Inicio
+ * leerDatos arma CATEGORIAS con bloques fijos (Servicios, Mercado, Salud,
+ * Ocio, Movilidad, KODA). El bloque 🎒 Artículos personales (EGRESOS filas
+ * 63–69, columnas B fecha, C descripción, D presup, E monto; Total en la 70)
+ * no entra en esa lista. Grok Bot sí, porque está en la pestaña KODA, que
+ * leerDatos ya lee. La fila 63 existe y E63 ya es 179; la web no la ve.
+ *
+ * En leerDatos (y en leerGastos, si usa otra tabla de bloques), agregar el
+ * mismo tipo de bloque que Salud, cambiando solo el rango:
+ *
+ *   antes: no hay entrada para Artículos personales
+ *   después:
+ *   {
+ *     nombre: "🎒 Artículos personales",
+ *     hoja: "EGRESOS",
+ *     filaDesde: 63,
+ *     filaHasta: 69,
+ *     colFecha: 2, colDesc: 3, colPresup: 4, colMonto: 5
+ *   }
+ *
+ * Cada mov debe seguir siendo [fecha, descripcion, presupuesto, monto].
+ * Con E63 = 179, monto es 179 y la web (v37) lo muestra como Pagado
+ * en el día 05/11 y dentro de Ya pagado este mes.
+ * Redeploy de la web app después de pegar esto. La hoja no hay que tocarla.
+ */
