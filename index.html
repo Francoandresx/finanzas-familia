@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- version: v37 -->
+<!-- version: v38 -->
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -11,11 +11,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Finanzas">
-<link rel="manifest" href="manifest.json?v=37">
-<link rel="icon" href="icon.svg?v=37" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png?v=37" type="image/png" sizes="32x32">
-<link rel="shortcut icon" href="favicon.ico?v=37">
-<link rel="apple-touch-icon" href="icon-180.png?v=37" sizes="180x180">
+<link rel="manifest" href="manifest.json?v=38">
+<link rel="icon" href="icon.svg?v=38" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png?v=38" type="image/png" sizes="32x32">
+<link rel="shortcut icon" href="favicon.ico?v=38">
+<link rel="apple-touch-icon" href="icon-180.png?v=38" sizes="180x180">
 <style>
 html,body{min-height:100vh;min-height:100dvh}
 #app{padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);box-sizing:border-box}
@@ -127,7 +127,7 @@ let e=xe(),red=Tt(),[tab,setTab]=(0,v.useState)("inicio"),[per,setPer]=(0,v.useS
 (0,v.useEffect)(()=>{if(tab==="inicio")setPulse(n=>n+1)},[tab]);
 let rows=Ay(per),hoyRows=Ay("hoy"),disp=O(hoyRows.reduce((a,r)=>a+(r.asignado||0),0)),falta=O(hoyRows.reduce((a,r)=>a+(r.pendiente||0),0));
 let meses=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],dias=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],cortos=["dom","lun","mar","mie","jue","vie","sab"];
-let ff=s=>{let str=String(s==null?"":s).trim();let iso=/^(\d{4})-(\d{2})-(\d{2})/.exec(str);if(iso){let d=new Date(Number(iso[1]),Number(iso[2])-1,Number(iso[3]));return isNaN(d.getTime())?null:d;}let m=/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/.exec(str);if(!m)return null;let y=m[3]?Number(m[3]):Number(me.ANIO)||new Date().getFullYear();if(y<100)y+=2000;let d=new Date(y,Number(m[2])-1,Number(m[1]));return isNaN(d.getTime())?null:d};
+let ff=s=>{if(s instanceof Date&&!isNaN(+s))return new Date(s.getFullYear(),s.getMonth(),s.getDate());let str=String(s==null?"":s).trim();let iso=/^(\d{4})-(\d{2})-(\d{2})/.exec(str);if(iso){let d=new Date(Number(iso[1]),Number(iso[2])-1,Number(iso[3]));return isNaN(d.getTime())?null:d;}let m=/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/.exec(str);if(!m)return null;let y=m[3]?Number(m[3]):Number(me.ANIO)||new Date().getFullYear();if(y<100)y+=2000;let d=new Date(y,Number(m[2])-1,Number(m[1]));return isNaN(d.getTime())?null:d};
 let hoy=ff(jt)||new Date(),ini=new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate()-hoy.getDay());
 let clave=d=>d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),pago=new Set();
 let mesLargo=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"][hoy.getMonth()];
@@ -160,7 +160,7 @@ let svg=(kind,on)=>{
   return (0,u.jsx)("svg",{...p,children:(0,u.jsx)("path",{d:kind})});
 };
 let listaDia=(items)=>{if(!items.length)return (0,u.jsx)("div",{style:{...glass,borderRadius:18,padding:"14px 16px",color:e.text.secondary,fontSize:14},children:"No hay gastos registrados este día"});return (0,u.jsxs)("div",{style:{...glass,borderRadius:22,overflow:"hidden"},children:[(0,u.jsx)("div",{style:{padding:"12px 16px 8px",fontSize:13,fontWeight:650,letterSpacing:"0.04em",textTransform:"uppercase",color:e.text.secondary},children:tituloDia}),items.map((it,i)=>(0,u.jsxs)("div",{style:{display:"grid",gridTemplateColumns:"1fr auto",columnGap:12,rowGap:2,padding:"12px 16px",borderTop:"1px solid rgba(255,255,255,0.10)",background:i%2?"rgba(255,255,255,0.035)":"transparent"},children:[(0,u.jsxs)("div",{style:{minWidth:0},children:[(0,u.jsx)("div",{style:{fontSize:15,fontWeight:650,lineHeight:1.25},children:it.desc}),(0,u.jsx)("div",{style:{marginTop:3,fontSize:12,color:e.text.secondary},children:vr(it.cat)+" · "+it.estado})]}),(0,u.jsx)("div",{style:{color:"#38D591",fontWeight:700,fontVariantNumeric:"tabular-nums",alignSelf:"center"},children:z(it.monto)})]},it.cat+"|"+it.desc+"|"+i))]})};
-return (0,u.jsxs)("div",{"data-ui":"v37",style:{minHeight:"100vh",background:"#070707",color:"#F2F2F2",fontFamily:In,boxSizing:"border-box",padding:"calc(18px + env(safe-area-inset-top, 0px)) 16px calc(118px + env(safe-area-inset-bottom, 0px))",maxWidth:560,margin:"0 auto"},children:[
+return (0,u.jsxs)("div",{"data-ui":"v38",style:{minHeight:"100vh",background:"#070707",color:"#F2F2F2",fontFamily:In,boxSizing:"border-box",padding:"calc(18px + env(safe-area-inset-top, 0px)) 16px calc(118px + env(safe-area-inset-bottom, 0px))",maxWidth:560,margin:"0 auto"},children:[
 (0,u.jsxs)("div",{key:tab,style:{animation:red?"none":"ffIn .28s cubic-bezier(.22,1,.36,1) both"},children:[
 tab==="inicio"?(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:16},children:[
 (0,u.jsxs)("div",{style:{paddingRight:44,animation:rise(0)},children:[(0,u.jsx)("h1",{style:h1,children:"Hola, Franco"}),(0,u.jsx)("div",{style:sub,children:`${dias[hoy.getDay()]} ${hoy.getDate()} ${meses[hoy.getMonth()]}`})]}),
