@@ -15,7 +15,7 @@ La app funciona igual que siempre hasta que completes estos pasos. Es un script 
 Pega esa URL en `index.html`, en la línea `var EXEC2_URL = "";`, o pásasela a Claude para que la ponga.
 
 ## 3. Agregar a la familia
-La primera vez que se use, el script crea la pestaña **USUARIOS** en tu hoja con una fila de ejemplo. Edítala a mano:
+La primera vez que se use, el script crea la pestaña **USUARIOS** en tu hoja con **Franco** y **Anny**. Puedes editarla a mano:
 
 | nombre | color | activo |
 |---|---|---|
@@ -27,6 +27,7 @@ Colores sugeridos de la paleta: `#38D591`, `#F2BE22`, `#F29727`, `#26A699`, `#A3
 ## Cómo funciona
 - Al abrir la app por primera vez en un teléfono, cada persona elige su perfil («¿Quién eres?»). Se puede cambiar en **Ajustes → Cambiar de usuario**.
 - Cada gasto, ingreso, ajuste o conteo se anota en la pestaña **BITACORA** con el nombre de quien lo hizo.
+- Franco tiene como foto un T-rex animado y Anny una oveja animada (circulares, ya incluidas en la app). Otros nombres usan un círculo con su inicial.
 - En **Historial** aparece el autor en cada movimiento y la pestaña **Actividad** con todo lo que hizo cada persona.
 
 ## Límites (importante)

@@ -32,7 +32,7 @@ function hoja_(nombre, cabecera, filasIniciales) {
 }
 
 function usuarios_() {
-  var sh = hoja_(HOJA_USUARIOS, ['nombre', 'color', 'activo'], [['Franco', COLORES[0], true]]);
+  var sh = hoja_(HOJA_USUARIOS, ['nombre', 'color', 'activo'], [['Franco', COLORES[0], true], ['Anny', COLORES[1], true]]);
   var valores = sh.getDataRange().getValues();
   var out = [];
   for (var i = 1; i < valores.length; i++) {
