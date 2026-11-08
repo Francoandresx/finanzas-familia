@@ -41,6 +41,18 @@ button[aria-label="Matar a Cookie"]{position:fixed!important;top:calc(8px + env(
 @keyframes wdOrbit{to{transform:rotate(360deg)}}@keyframes wdHalo{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.4);opacity:0}}@keyframes wdGlow{0%,100%{opacity:.35;transform:scale(.92)}50%{opacity:.85;transform:scale(1.04)}}@keyframes wdWave{0%,100%{opacity:.6}50%{opacity:1}}@keyframes wdBlink{0%,100%{opacity:.3}50%{opacity:1}}@keyframes wdPing{0%{transform:scale(1);opacity:.6}100%{transform:scale(2);opacity:0}}@keyframes wdGrowX{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes wdShine{from{transform:translateX(-110%)}to{transform:translateX(320%)}}@keyframes wdGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}@keyframes wdBreath{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.9)}}@keyframes wdPulse{0%{box-shadow:0 0 0 0 rgba(56,213,145,.5)}70%,100%{box-shadow:0 0 0 9px rgba(56,213,145,0)}}
 @keyframes ffRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes ffIn{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes navPop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-5px) scale(1.18)}70%{transform:translateY(1px) scale(.96)}100%{transform:none}}
+@keyframes navDot{from{opacity:0;transform:scaleX(.2)}to{opacity:1;transform:none}}
+@keyframes fabRing{0%{opacity:.55;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.55)}}
+@keyframes fabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes ffFade{from{opacity:0}to{opacity:1}}
+nav[aria-label="Secciones"] button{position:relative}
+nav[aria-label="Secciones"] button[aria-current="page"] svg{animation:navPop .5s cubic-bezier(.34,1.56,.64,1) both}
+nav[aria-label="Secciones"] button[aria-current="page"]::after{content:"";position:absolute;top:-6px;left:50%;width:18px;height:3px;margin-left:-9px;border-radius:3px;background:#38D591;animation:navDot .35s ease both}
+nav[aria-label="Secciones"] button[aria-label="Agregar"]{position:relative;animation:fabFloat 3.4s ease-in-out infinite}
+nav[aria-label="Secciones"] button[aria-label="Agregar"]::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #38D591;pointer-events:none;animation:fabRing 2.6s ease-out infinite}
+div[role="dialog"]{animation:ffFade .22s ease both}
+@media (prefers-reduced-motion:reduce){nav[aria-label="Secciones"] button svg,nav[aria-label="Secciones"] button::after,nav[aria-label="Secciones"] button::before,nav[aria-label="Secciones"] button{animation:none!important}div[role="dialog"]{animation:none}}
 .ff-card{transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s}
 .ff-card:active{transform:scale(.975)}
 
@@ -526,7 +538,7 @@ __h(__WdB,{hoy,items:porPagar.map(it=>({d:ff(it.fecha),monto:it.monto,desc:it.de
 __h(__CatRes,{rows,red}),
 vt==="tarjetas"?(0,u.jsx)(PilaCats,{o:rows,sinCab:!0,irLista:()=>setVt("lista")}):(0,u.jsx)("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 270px), 1fr))",gap:18,alignItems:"start"},children:rows.map((f,g)=>(0,u.jsx)(Iy,{r:f,vista:per,i:g},f.c.nombre))}),
 (0,u.jsx)("div",{style:{fontSize:12,color:e.text.tertiary},children:vt==="tarjetas"?"Toca una categoría para ver cuánto tienes hoy; el detalle completo está en Lista.":"Toca una tarjeta para ver sus líneas: qué está cubierto, qué no y sus fechas."})
-]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v57",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
+]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v58",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
 (0,u.jsxs)("div",{style:{animation:rise(0)},children:[(0,u.jsx)("h1",{style:h1,children:"Agregar"}),(0,u.jsx)("div",{style:sub,children:"Gastos, ingresos y el conteo"})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("gasto"),style:{...M0(e,"#A3365A"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(1)},children:[ico("−"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar gasto"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige categoría y el gasto del presupuesto"})]})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("ingreso"),style:{...M0(e,"#26A699"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(2)},children:[ico("+"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar ingreso"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige un cliente de la hoja"})]})]}),
