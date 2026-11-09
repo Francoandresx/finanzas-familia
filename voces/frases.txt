@@ -1,0 +1,14 @@
+FRASES DE COOKIE PARA GRABAR EN ELEVENLABS
+Graba cada frase y guarda el audio con el nombre indicado (formato mp3).
+
+01.mp3  Buen momento para revisar qué vence hoy.
+02.mp3  Registra cada gasto el mismo día: lo pequeño también suma.
+03.mp3  Antes de comprar algo que no planeaste, espera 24 horas.
+04.mp3  Revisa las suscripciones: cancela las que no usaste este mes.
+05.mp3  Cuando cobres, aparta primero el ahorro y luego gasta.
+06.mp3  Aquí ves cuánto llevas en cada categoría. Toca una para ver sus movimientos.
+07.mp3  Aquí está todo lo que pagaste y lo que falta.
+08.mp3  Aquí actualizas los datos de tu hoja.
+09.mp3  Cliente nuevo agregado.
+10.mp3  Listo, ajusté el gasto.
+11.mp3  Desde aquí cambias de perfil o actualizas los datos.
