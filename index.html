@@ -11,6 +11,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Finanzas">
+<meta name="ff-build" content="67">
+<script>
+(function(){try{var me=document.querySelector('meta[name="ff-build"]');var cur=me?+me.content:0;
+fetch(location.pathname+'?chk='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+var m=/name="ff-build" content="(\d+)"/.exec(t);if(!m)return;var nv=+m[1];
+if(nv>cur){var k='ffReload'+nv;if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');location.replace(location.pathname+'?v='+nv)}}).catch(function(){})}catch(e){}})();
+</script>
 <link rel="manifest" href="manifest.json?v=57">
 <link rel="icon" href="icon.svg?v=57" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png?v=57" type="image/png" sizes="32x32">
@@ -599,7 +606,7 @@ __h(__WdB,{hoy,items:porPagar.map(it=>({d:ff(it.fecha),monto:it.monto,desc:it.de
 __h(__CatRes,{rows,red}),
 __h("div",{key:per+"|"+vt,style:{animation:red?"none":"ffIn .36s cubic-bezier(.22,1,.36,1) both"}},vt==="tarjetas"?(0,u.jsx)(PilaCats,{o:rows,sinCab:!0,irLista:()=>setVt("lista")}):(0,u.jsx)("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 270px), 1fr))",gap:18,alignItems:"start"},children:rows.map((f,g)=>(0,u.jsx)(Iy,{r:f,vista:per,i:g},f.c.nombre))})),
 (0,u.jsx)("div",{style:{fontSize:12,color:e.text.tertiary},children:vt==="tarjetas"?"Toca una categoría para ver cuánto tienes hoy; el detalle completo está en Lista.":"Toca una tarjeta para ver sus líneas: qué está cubierto, qué no y sus fechas."})
-]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v66",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
+]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v67",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
 (0,u.jsxs)("div",{style:{animation:rise(0)},children:[(0,u.jsx)("h1",{style:h1,children:"Agregar"}),(0,u.jsx)("div",{style:sub,children:"Gastos, ingresos y el conteo"})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("gasto"),style:{...M0(e,"#A3365A"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(1)},children:[ico("−"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar gasto"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige categoría y el gasto del presupuesto"})]})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("ingreso"),style:{...M0(e,"#26A699"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(2)},children:[ico("+"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar ingreso"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige un cliente de la hoja"})]})]}),
