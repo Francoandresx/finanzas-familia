@@ -425,9 +425,25 @@ function __WCobro({real,pres,red,an}){
    __h("div",{style:{display:"grid",gridTemplateColumns:"repeat("+N+", 1fr)",gap:3,height:26}},
     Array.from({length:N},(_,i)=>(0,u.jsx)("span",{style:{borderRadius:4,background:on&&i<lit?"linear-gradient(180deg,#38D591,#26A699)":"rgba(255,255,255,0.09)",transition:red?"none":"background .35s ease "+(i*55)+"ms, transform .35s ease "+(i*55)+"ms",transform:on&&i<lit?"scaleY(1)":"scaleY(.72)",transformOrigin:"bottom",...(on&&i<lit?__lp(red,vis,"wdWave",2.6,i*.16):on&&i===lit&&lit<N?__lp(red,vis,"wdBlink",1.8,0,{background:"rgba(56,213,145,0.5)"}):{})}},i))),
    __h("div",{style:{marginTop:8,fontSize:12,fontWeight:650,color:falta>0?"#F2BE22":"#38D591"}},falta>0?"Faltan "+z(falta):"Todo cobrado")),__h("div",{className:"ck-host","aria-hidden":!0}))}
+function __WSobra({pu,f0,pres,red,an}){
+ let [r,on,vis]=__useVista(red),cats=(Array.isArray(fn)?fn:[]).filter(c=>c.presupuesto>0).map(c=>{let g=Fn(c),p=O(c.presupuesto);return{n:c.nombre,p,g,q:O(p-g)}}),
+ queda=O(f0-pu),sobra=O((pres||0)-f0),tieneIng=pres>0,col=queda<0||(tieneIng&&sobra<0)?"#F2BE22":"#38D591",bl=(t,v,k,c)=>__h("div",{style:{flex:"1 1 130px",minWidth:0}},__h("div",{style:{fontSize:12,color:"rgba(242,242,242,0.6)"}},t),__h("div",{style:{marginTop:3,fontSize:24,fontWeight:700,letterSpacing:"-0.02em",fontVariantNumeric:"tabular-nums",color:c}},__h(__Num,{val:v,k,abre:0,red,dur:1000})));
+ if(!(f0>0))return null;
+ return __h("div",{ref:r,"data-ck":"sobra","data-ck-dice":queda>=0?"Del presupuesto de gastos te quedan "+z(queda)+".":"Te pasaste del presupuesto por "+z(-queda)+".",className:"ff-card",style:__wt(col,{animation:an})},
+  __h("div",{style:{fontSize:13,fontWeight:600,color:"rgba(242,242,242,0.62)"}},"Lo que sobra del mes"),
+  __h("div",{style:{display:"flex",flexWrap:"wrap",gap:"10px 16px",marginTop:8}},
+   bl(queda>=0?"Queda del presupuesto de gastos":"Te pasaste del presupuesto",Math.abs(queda),"sobra-queda",queda>=0?"#38D591":"#F24C3D"),
+   tieneIng?bl(sobra>=0?"Sobra si cumples el presupuesto":"Falta si cumples el presupuesto",Math.abs(sobra),"sobra-mes",sobra>=0?"#38D591":"#F24C3D"):null),
+  tieneIng?__h("div",{style:{marginTop:6,fontSize:12,color:"rgba(242,242,242,0.5)"}},"Ingresos presupuestados "+z(pres)+" − gastos presupuestados "+z(f0)):null,
+  __h("div",{style:{marginTop:12,display:"flex",flexDirection:"column"}},cats.map((x,i)=>{let pc=Math.max(0,Math.min(1,x.p>0?x.g/x.p:0)),over=x.q<0,cc=over?"#F24C3D":pc>.85?"#F2BE22":"#38D591";
+    return __h("div",{key:x.n,className:"ff-row",style:{padding:"8px 4px",borderTop:i?"1px solid rgba(255,255,255,0.07)":"none",borderRadius:10}},
+     __h("div",{style:{display:"flex",justifyContent:"space-between",gap:8,fontSize:13.5}},__h("span",{style:{minWidth:0,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}},x.n),__h("b",{style:{color:cc,fontVariantNumeric:"tabular-nums",whiteSpace:"nowrap"}},over?"Pasado "+z(-x.q):"Quedan "+z(x.q))),
+     __h("div",{"aria-hidden":!0,style:{marginTop:6,height:6,borderRadius:3,background:"rgba(255,255,255,0.08)",overflow:"hidden"}},__h("div",{style:{height:"100%",width:"100%",borderRadius:3,background:cc,transformOrigin:"left center",transform:"scaleX("+(on||red?pc:0)+")",transition:red?"none":"transform .9s cubic-bezier(.22,1,.36,1) "+(i*70)+"ms"}})),
+     __h("div",{style:{marginTop:4,fontSize:11.5,color:"rgba(242,242,242,0.5)"}},"Gastado "+z(x.g)+" de "+z(x.p)))})),
+  __h("div",{className:"ck-host","aria-hidden":!0}))}
 function __WdA({pu,f0,hoy,real,pres,red,an}){
  if(!(f0>0)&&!(pres>0))return null;
- return __h("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(150px, 1fr))",gap:12}},__h(__WRitmo,{pu,f0,hoy,red,an:an(2)}),__h(__WCobro,{real,pres,red,an:an(2)}))}
+ return __h("div",{style:{display:"flex",flexDirection:"column",gap:12}},__h("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(150px, 1fr))",gap:12}},__h(__WRitmo,{pu,f0,hoy,red,an:an(2)}),__h(__WCobro,{real,pres,red,an:an(2)})),__h(__WSobra,{pu,f0,pres,red,an:an(3)}))}
 function __W7({hoy,items,red,an}){
  let [r,on,vis]=__useVista(red),D=["D","L","M","M","J","V","S"],cl=d=>d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate(),
  dias=Array.from({length:7},(_,i)=>{let d=new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate()+i);return {d,m:0,top:null}});
@@ -583,7 +599,7 @@ __h(__WdB,{hoy,items:porPagar.map(it=>({d:ff(it.fecha),monto:it.monto,desc:it.de
 __h(__CatRes,{rows,red}),
 __h("div",{key:per+"|"+vt,style:{animation:red?"none":"ffIn .36s cubic-bezier(.22,1,.36,1) both"}},vt==="tarjetas"?(0,u.jsx)(PilaCats,{o:rows,sinCab:!0,irLista:()=>setVt("lista")}):(0,u.jsx)("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 270px), 1fr))",gap:18,alignItems:"start"},children:rows.map((f,g)=>(0,u.jsx)(Iy,{r:f,vista:per,i:g},f.c.nombre))})),
 (0,u.jsx)("div",{style:{fontSize:12,color:e.text.tertiary},children:vt==="tarjetas"?"Toca una categoría para ver cuánto tienes hoy; el detalle completo está en Lista.":"Toca una tarjeta para ver sus líneas: qué está cubierto, qué no y sus fechas."})
-]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v65",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
+]}):tab==="hist"?__h(__Hist,{items:histItems,hoy,meses,mes:mesLargo,h1,sub,usuariosOn:!!window.__usuariosOn,yo:nombreU}):tab==="aj"?__h(__Aj,{nombre:nombreU,color:colorU,usuariosOn:!!window.__usuariosOn,version:"v66",act:String(Ih||"—"),h1,sub}):(0,u.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:14},children:[
 (0,u.jsxs)("div",{style:{animation:rise(0)},children:[(0,u.jsx)("h1",{style:h1,children:"Agregar"}),(0,u.jsx)("div",{style:sub,children:"Gastos, ingresos y el conteo"})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("gasto"),style:{...M0(e,"#A3365A"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(1)},children:[ico("−"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar gasto"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige categoría y el gasto del presupuesto"})]})]}),
 (0,u.jsxs)("button",{type:"button",className:"ff-card",onClick:()=>abrir("ingreso"),style:{...M0(e,"#26A699"),display:"flex",gap:14,alignItems:"center",textAlign:"left",width:"100%",padding:"16px 16px",cursor:"pointer",color:"#F2F2F2",fontFamily:"inherit",WebkitTapHighlightColor:"transparent",animation:rise(2)},children:[ico("+"),(0,u.jsxs)("span",{children:[(0,u.jsx)("span",{style:{display:"block",fontSize:18,fontWeight:700},children:"Agregar ingreso"}),(0,u.jsx)("span",{style:{display:"block",marginTop:3,fontSize:13,color:e.text.secondary},children:"Elige un cliente de la hoja"})]})]}),
