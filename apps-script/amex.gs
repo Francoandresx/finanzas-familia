@@ -4,10 +4,7 @@
  * Va en el MISMO proyecto de Apps Script de la hoja del mes (el que responde a leerDatos).
  * La primera vez crea la pestaña «AMEX» en la hoja. No toca EGRESOS, INGRESOS ni CONTEO.
  *
- * En doGet hay que enrutar tres acciones nuevas (junto a las demás):
- *   else if (p.api === 'leerAmex')    r = leerAmex(datos);
- *   else if (p.api === 'guardarAmex') r = guardarAmex(datos);
- *   else if (p.api === 'movAmex')     r = movAmex(datos);
+ * Se registran solas en API_ACCIONES (al final de este archivo): leerAmex, guardarAmex, movAmex.
  *
  * Pestaña AMEX:
  *   C5 Línea total · C6 Lo que debemos hoy (fórmula) · C7 Disponible · C8 Usado
@@ -20,7 +17,7 @@
 var AMEX_HOJA = 'AMEX';
 
 function amexHoja_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SpreadsheetApp.getActive();
   var sh = ss.getSheetByName(AMEX_HOJA);
   if (sh) return sh;
   sh = ss.insertSheet(AMEX_HOJA);
@@ -64,7 +61,7 @@ function amexMovs_(sh) {
 }
 
 function leerAmex() {
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(AMEX_HOJA);
+  var sh = SpreadsheetApp.getActive().getSheetByName(AMEX_HOJA);
   if (!sh || sh.getRange('C5').getValue() === '') return { vacio: true };
   var v = sh.getRange('C5:C11').getValues().map(function (r) { return r[0]; });
   var base = v[6] instanceof Date ? v[6] : (v[6] ? new Date(v[6]) : null);
@@ -80,8 +77,7 @@ function leerAmex() {
 
 function guardarAmex(d) {
   d = d || {};
-  var lock = LockService.getScriptLock(); lock.waitLock(20000);
-  try {
+  {
     var sh = amexHoja_();
     if (d.linea != null) sh.getRange('C5').setValue(Number(d.linea));
     if (Object.prototype.hasOwnProperty.call(d, 'dia')) sh.getRange('C9').setValue(d.dia == null || d.dia === '' ? '' : Number(d.dia));
@@ -90,7 +86,7 @@ function guardarAmex(d) {
       sh.getRange('C11').setValue(d.baseTs ? new Date(d.baseTs) : new Date());
     }
     SpreadsheetApp.flush();
-  } finally { lock.releaseLock(); }
+  }
   return leerAmex();
 }
 
@@ -98,8 +94,7 @@ function movAmex(d) {
   d = d || {};
   var tipo = d.t === 'pago' ? 'pago' : 'compra', monto = Number(d.m) || 0;
   if (!(monto > 0)) throw new Error('Monto no válido');
-  var lock = LockService.getScriptLock(); lock.waitLock(20000);
-  try {
+  {
     var sh = amexHoja_(), ts = d.ts ? new Date(d.ts) : new Date();
     var ya = amexMovs_(sh).some(function (m) { return m.ts === ts.toISOString() && m.t === tipo && Math.abs(m.m - monto) < 0.005; });
     if (!ya) {
@@ -109,6 +104,19 @@ function movAmex(d) {
       sh.getRange(fila, 6, 1, 4).setFontColor(tipo === 'pago' ? '#93E36B' : '#FF8FB1');
     }
     SpreadsheetApp.flush();
-  } finally { lock.releaseLock(); }
+  }
   return leerAmex();
+}
+
+/** Ejecutar una vez desde el editor (▶ crearAmex): crea la pestaña AMEX con los datos iniciales. */
+function crearAmex() {
+  var sh = amexHoja_();
+  if (sh.getRange('C5').getValue() === '') guardarAmex({ linea: 1000, base: 503.05, baseTs: '2026-11-27T16:17:00.000Z', dia: null });
+  Logger.log(JSON.stringify(leerAmex()));
+}
+
+if (typeof API_ACCIONES !== 'undefined') {
+  API_ACCIONES.leerAmex = function (d) { return leerAmex(d); };
+  API_ACCIONES.guardarAmex = function (d) { return guardarAmex(d); };
+  API_ACCIONES.movAmex = function (d) { return movAmex(d); };
 }
