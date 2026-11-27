@@ -931,7 +931,7 @@ function __amxSync(){if(window.__amxSyncing)return;window.__amxSyncing=1;
  ()=>{window.__amxRemoto=!1;window.__amxSyncing=0;try{window.dispatchEvent(new Event("ff-amex"))}catch(e){}})}
 function __amxOp(api,data){let q=__amxQ();q.push({api,data});__amxSetQ(q);if(window.__amxRemoto)__amxFlush()}
 function __amxTs(f){let h=new Date(),s=String(f||"").trim(),y,mo,d,k=s.match(/^(\d{4})-(\d{2})-(\d{2})/)||null,k2=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/)||null;if(k){y=+k[1];mo=+k[2];d=+k[3]}else if(k2){d=+k2[1];mo=+k2[2];y=+k2[3]}else return h.toISOString();if(y===h.getFullYear()&&mo-1===h.getMonth()&&d===h.getDate())return h.toISOString();return new Date(y,mo-1,d,12,0,0).toISOString()}
-function __amxMov(t,m,d,c,f){let a=__amxGet(),mv={ts:__amxTs(f),t,m:O(Number(m)||0),d:String(d||""),c:String(c||""),u:(window.__usuario&&window.__usuario.nombre)||""};__amxSet({...a,movs:(a.movs||[]).concat([mv]).slice(-120)});__amxOp("movAmex",mv)}
+function __amxMov(t,m,d,c,f,pr){let a=__amxGet(),mv={ts:__amxTs(f),t,m:O(Number(m)||0),d:String(d||""),c:String(c||""),u:(window.__usuario&&window.__usuario.nombre)||""};if(pr)mv.pres=!0;__amxSet({...a,movs:(a.movs||[]).concat([mv]).slice(-120)});__amxOp("movAmex",mv)}
 function __amxConfig(cfg){let a=__amxGet(),n={...a,...cfg};__amxSet(n);__amxOp("guardarAmex",cfg)}
 function __useAmx(){let [a,sa]=(0,v.useState)(()=>__amxGet()),[,rr]=(0,v.useState)(0);(0,v.useEffect)(()=>{let f=()=>{sa(__amxGet());rr(x=>x+1)};window.addEventListener("ff-amex",f);if(!window.__amxPedido){window.__amxPedido=1;setTimeout(__amxSync,1200)}return()=>window.removeEventListener("ff-amex",f)},[]);return a}
 function __amxAbrir(modo){try{window.dispatchEvent(new CustomEvent("ff-amex-abrir",{detail:{modo}}))}catch(e){}}
@@ -940,7 +940,7 @@ function __amxFecha(a,hoy){if(!a||!a.dia)return null;let d=Number(a.dia);if(!(d>
 /* Al registrar: compras con Amex y aviso al cobrar */
 if(!window.__amxEvt){window.__amxEvt=1;window.addEventListener("cookie-evento",e=>{try{let d=e.detail||{},p=d.p||{},ac=d.accion;
  let esGasto=ac==="pagarGasto"||ac==="nuevoGasto"||ac==="agregarMovimiento"&&p.tipo!=="ingreso",esIng=ac==="pagarIngreso"||ac==="agregarMovimiento"&&p.tipo==="ingreso";
- if(esGasto&&window.__amexPago){let m=Number(p.monto)||0;if(m>0)__amxMov("compra",m,p.descripcion||p.nombre||"Gasto",p.categoria,p.fecha);window.__amexPago=!1;window.dispatchEvent(new Event("ff-amex-tgl"))}
+ if(esGasto&&window.__amexPago){let m=Number(p.monto)||0;if(m>0)__amxMov("compra",m,p.descripcion||p.nombre||"Gasto",p.categoria,p.fecha,!(ac==="nuevoGasto"&&p.pagado===!1));window.__amexPago=!1;window.dispatchEvent(new Event("ff-amex-tgl"))}
  if(esIng&&__amxDeuda()>0)setTimeout(()=>__amxAbrir("aviso"),2300)}catch(x){}});window.addEventListener("ff-abrir",()=>{window.__amexPago=!1;try{window.dispatchEvent(new Event("ff-amex-tgl"))}catch(x){}})}
 
 /* Selector "¿Cómo lo pagaste?" dentro del formulario de gasto */
